@@ -14,5 +14,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
-this is good
+ 
+First App 1: This is my first personal notes project live on google playstore account. 
+          date is : 28/03/2023
