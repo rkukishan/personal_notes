@@ -11,18 +11,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Timer.periodic(const Duration(seconds: 2), (timer) {
-    if (mounted) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageScreen(),));
-    }
+      if (mounted) {
+        /*Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePageScreen(),
+            )); */
+
+        Navigator.pushReplacementNamed(context, "homepagescreen");
+        
+      }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

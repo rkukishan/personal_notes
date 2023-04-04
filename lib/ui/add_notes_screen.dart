@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:personal_notes/database/db_helper.dart';
 import 'package:personal_notes/database/services.dart';
 import 'package:personal_notes/model/notes_model.dart';
 import 'package:personal_notes/ui/home_page_screen.dart';
 
-class AddNotes extends StatefulWidget {
-  const AddNotes({Key? key}) : super(key: key);
+class AddNotesScreen extends StatefulWidget {
+  const AddNotesScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddNotes> createState() => _AddNotesState();
+  State<AddNotesScreen> createState() => _AddNotesScreenState();
 }
 
-class _AddNotesState extends State<AddNotes> {
+class _AddNotesScreenState extends State<AddNotesScreen> {
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
 
+  DateTime dateTime = DateTime.now();
+
   DBHelper? dbHelper;
   ServicesFile? servicesFile;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -26,18 +30,24 @@ class _AddNotesState extends State<AddNotes> {
   }
 
   addNotes() async {
+    String date = DateFormat("yyyy-MM-dd").format(dateTime);
+
     dbHelper!
         .insertNotes(NotesModel(
             title: titleController.text.toString(),
-            body: bodyController.text.toString()))
+            body: bodyController.text.toString(),
+            datetime: date))
         .then((value) => print("insert"));
 
     servicesFile!.loadData();
     // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageScreen(),));
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePageScreen(),), (route) => false);
-    setState(() {
-
-    });
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePageScreen(),
+        ),
+        (route) => false);
+    setState(() {});
   }
 
   @override
@@ -55,7 +65,6 @@ class _AddNotesState extends State<AddNotes> {
           children: [
             TextField(
               keyboardType: TextInputType.text,
-              textDirection: TextDirection.ltr,
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               controller: titleController,
               decoration: const InputDecoration(
@@ -70,7 +79,6 @@ class _AddNotesState extends State<AddNotes> {
             TextField(
               maxLines: null,
               keyboardType: TextInputType.text,
-              textDirection: TextDirection.ltr,
               style:
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
               controller: bodyController,
@@ -90,9 +98,7 @@ class _AddNotesState extends State<AddNotes> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           await addNotes();
-          setState(() {
-
-          });
+          setState(() {});
         },
         label: Text("Add Notes"),
         icon: Icon(Icons.add),

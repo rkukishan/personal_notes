@@ -17,3 +17,6 @@ samples, guidance on mobile development, and a full API reference.
  
 First App 1: This is my first personal notes project live on google playstore account. 
           date is : 28/03/2023
+
+Change 2: Adding a Slidable listview and listviewbuilder to change listview separated and adding to share option
+            date is : 04/04/2023 

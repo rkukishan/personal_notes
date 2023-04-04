@@ -10,6 +10,7 @@ class DBHelper {
   static const String title = 'title';
   static const String body = 'body';
   static const String table_name = 'notes';
+  static const String datetime = "datetime";
   static const String db_name = 'personal_notes.db';
   static const int db_version = 1;
 
@@ -31,9 +32,10 @@ class DBHelper {
   _onCreate(Database db, int version)async{
       await db.execute('''
       CREATE TABLE $table_name (
-        $id integer primary key autoincrement,
-        $title text not null,
-        $body text not null
+        $id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $title TEXT NOT NULL,
+        $body TEXT NOT NULL,
+        $datetime DATETIME
       )
       ''');
   }
